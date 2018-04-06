@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "872616184895",
+    "firebase_url": "https://smarthome-7146a.firebaseio.com",
+    "project_id": "smarthome-7146a",
+    "storage_bucket": "smarthome-7146a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:872616184895:android:e58dfb8cf1d4559a",
+        "android_client_info": {
+          "package_name": "com.example.myfirstapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "872616184895-13kped370jmf44443d8ttk164oh6qsum.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXmu1ufnj7nK3LrDZxdvq-Kl_gxNzl1-I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
