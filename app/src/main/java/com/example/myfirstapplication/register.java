@@ -30,14 +30,14 @@ public class register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         mAuth = FirebaseAuth.getInstance();
 
-        e1 = (EditText) findViewById(R.id.editText3);
-        e2= (EditText) findViewById(R.id.editText4);
-        e3= (EditText) findViewById(R.id.editText5);
-        e4=(EditText)findViewById(R.id.editText6);
-        t1= (TextView) findViewById(R.id.textView5);
-        t2=(TextView)findViewById(R.id.textView6);
-        t3=(TextView)findViewById(R.id.textView7);
-        t4=(TextView)findViewById(R.id.textView8);
+        e1=findViewById(R.id.editText3);
+        e2=findViewById(R.id.editText4);
+        e3=findViewById(R.id.editText5);
+        e4=findViewById(R.id.editText6);
+        t1=findViewById(R.id.textView5);
+        t2=findViewById(R.id.textView6);
+        t3=findViewById(R.id.textView7);
+        t4=findViewById(R.id.textView8);
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -112,12 +112,17 @@ public class register extends AppCompatActivity {
                             Intent intent= new Intent(register.this,login.class);
                             startActivity(intent);
 
+
                             // If sign in fails, display a message to the user. If sign in succeeds
                             // the auth state listener will be notified and logic to handle the
                             // signed in user can be handled in the listener.
                             if (!task.isSuccessful()) {
                                 Toast.makeText(register.this, "Signup Failed!!", Toast.LENGTH_SHORT).show();
                             }
+
+
+
+
                         }
                     });
         }

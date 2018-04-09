@@ -15,7 +15,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import static com.example.myfirstapplication.R.id.emailID;
+
 
 public class login extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -29,8 +29,8 @@ public class login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mAuth = FirebaseAuth.getInstance();
-        loginMail=(EditText) findViewById(R.id.emailID);
-        loginPassword= (EditText) findViewById(R.id.password);
+        loginMail=findViewById(R.id.mail);
+        loginPassword=findViewById(R.id.password);
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -64,7 +64,7 @@ public class login extends AppCompatActivity {
     }
 
 
-    public void Signin(View view) {
+    public void signin(View view) {
         String mailid = loginMail.getText().toString();
         String password = loginPassword.getText().toString();
 
@@ -97,7 +97,7 @@ public class login extends AppCompatActivity {
 
     }
 
-    public void register(View view) {
+    public void registernew(View view) {
        Intent intent1= new Intent(login.this,register.class);
         startActivity(intent1);
     }
