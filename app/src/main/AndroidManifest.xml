@@ -21,10 +21,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".login" />
-        <activity android:name=".register"></activity>
+        <activity android:name=".register" />
 
-        <service android:name=".BluetoothService"
+        <service
+            android:name=".BluetoothService"
             android:exported="false" />
+
+        <activity android:name=".AssistanceActivity"></activity>
     </application>
 
 </manifest>

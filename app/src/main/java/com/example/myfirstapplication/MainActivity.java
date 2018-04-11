@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +26,8 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     TextView textView;
-    ArrayList arrayList;
+    String recognizedevent;
+    ArrayList arrayList = new ArrayList();
     RecyclerView recyclerView;
     RecyclerAdapter adapter;
     RecyclerView.LayoutManager layoutManager;
@@ -40,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //arrayList.add("LiftCup");
+        //arrayList.add("LiftCoffeeContainer");
+
         t1=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -51,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyle);
         textView = findViewById(R.id.textview);
-        DatabaseReference event = myRef.child("Sensor").child("SensorEvent");
+        final DatabaseReference event = myRef.child("Sensor").child("SensorEvent");
 
         //checkBluetoothAdapter();
 
@@ -60,9 +65,12 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
                 textView.setText(value);
+                recognizedevent = value;
 
-                String toSpeak = "Recognized event is"+value;
+                String toSpeak = "Recognized action is"+value;
                 t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+
+                get_assist();
 
                 Log.d("data", "Value is: " + value);
             }
@@ -73,13 +81,39 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        adapter = new RecyclerAdapter(arrayList, this);
+        adapter = new RecyclerAdapter(arrayList, this, recognizedevent);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    private void get_assist() {
+        myRef.child(recognizedevent).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot tmp : dataSnapshot.getChildren()) {
+                    arrayList.add(tmp.getKey());
+                    Log.d("Array", tmp.getKey());
+                }
+
+                recyclerView.setVisibility(View.VISIBLE);
+                adapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void checkBluetoothAdapter() {
